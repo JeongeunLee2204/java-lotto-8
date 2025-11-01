@@ -1,12 +1,12 @@
 package lotto;
 
-import lotto.view.InputView;
+import lotto.InputView;
 import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        int purchaseAmount = lotto.view.InputView.readPurchaseAmount();
+        int purchaseAmount = lotto.InputView.readPurchaseAmount();
         System.out.println(purchaseAmount + "원 입력됨 (테스트용)");
 
         int count = purchaseAmount / 1000;
@@ -17,8 +17,8 @@ public class Application {
             System.out.println(lotto);
         }
 
-        List<Integer> winningNumbers = lotto.view.InputView.readWinningNumbers();
-        int bonusNumber = lotto.view.InputView.readBonusNumber(winningNumbers);
+        List<Integer> winningNumbers = lotto.InputView.readWinningNumbers();
+        int bonusNumber = lotto.InputView.readBonusNumber(winningNumbers);
 
         LottoResult result = new LottoResult(lottos, winningNumbers, bonusNumber);
         result.printResult(purchaseAmount);

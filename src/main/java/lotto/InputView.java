@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto;
 
 import camp.nextstep.edu.missionutils.Console;
 import lotto.InputValidator;
@@ -20,10 +20,10 @@ public class InputView {
             return amount;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return readPurchaseAmount(); // 재입력
+            return readPurchaseAmount();
         } catch (Exception e) {
-            System.out.println("[ERROR] 올바른 숫자를 입력해야 합니다.");
-            return readPurchaseAmount(); // 재입력
+            System.out.println("[ERROR] 숫자 형식이 올바르지 않습니다.");
+            return readPurchaseAmount();
         }
     }
 
@@ -31,8 +31,7 @@ public class InputView {
         System.out.println("\n당첨 번호를 입력해 주세요.");
         String input = Console.readLine();
         try {
-            List<Integer> numbers = parseWinningNumbers(input);
-            return numbers;
+            return parseWinningNumbers(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readWinningNumbers();

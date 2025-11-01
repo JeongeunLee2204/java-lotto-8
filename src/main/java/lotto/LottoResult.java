@@ -3,7 +3,6 @@ package lotto;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import lotto.Rank;
 
 public class LottoResult {
 
@@ -12,6 +11,9 @@ public class LottoResult {
     private final int bonusNumber;
 
     public LottoResult(List<Lotto> lottos, List<Integer> winningNumbers, int bonusNumber) {
+        if (lottos == null || winningNumbers == null) {
+            throw new IllegalStateException("[ERROR] 로또 결과 계산 중 잘못된 데이터가 있습니다.");
+        }
         this.lottos = lottos;
         this.winningNumbers = winningNumbers;
         this.bonusNumber = bonusNumber;
@@ -55,6 +57,10 @@ public class LottoResult {
     }
 
     private void printProfitRate(Map<Rank, Integer> rankCounts, int purchaseAmount) {
+        if (purchaseAmount <= 0) {
+            throw new IllegalArgumentException("[ERROR] 구매 금액이 올바르지 않습니다.");
+        }
+
         long totalPrize = 0;
         for (Rank rank : rankCounts.keySet()) {
             totalPrize += (long) rank.getPrize() * rankCounts.get(rank);
