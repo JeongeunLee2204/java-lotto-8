@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.view.InputView;
 import java.util.List;
+import lotto.Rank;
 
 public class Application {
     public static void main(String[] args) {
@@ -16,5 +17,11 @@ public class Application {
         for (Lotto lotto : lottos) {
             System.out.println(lotto);
         }
+
+        List<Integer> winningNumbers = lotto.view.InputView.readWinningNumbers();
+        int bonusNumber = lotto.view.InputView.readBonusNumber(winningNumbers);
+
+        LottoResult result = new LottoResult(lottos, winningNumbers, bonusNumber);
+        result.printResult();
     }
 }
