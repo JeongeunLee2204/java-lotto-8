@@ -17,7 +17,7 @@ public class LottoResult {
         this.bonusNumber = bonusNumber;
     }
 
-    public void printResult() {
+    public void printResult(int purchaseAmount) {
         System.out.println("\n당첨 통계");
         System.out.println("---");
 
@@ -27,6 +27,8 @@ public class LottoResult {
             if (rank == Rank.NONE) continue;
             System.out.println(rank.getMessage() + " - " + rankCounts.getOrDefault(rank, 0) + "개");
         }
+
+        printProfitRate(rankCounts, purchaseAmount);
     }
 
     private Map<Rank, Integer> countRanks() {
@@ -47,10 +49,20 @@ public class LottoResult {
     private int countMatches(Lotto lotto) {
         int count = 0;
         for (int num : lotto.getNumbers()) {
-            if (winningNumbers.contains(num)) {
-                count++;
-            }
+            if (winningNumbers.contains(num)) count++;
         }
         return count;
+    }
+
+    private void printProfitRate(Map<Rank, Integer> rankCounts, int purchaseAmount) {
+        long totalPrize = 0;
+        for (Rank rank : rankCounts.keySet()) {
+            totalPrize += (long) rank.getPrize() * rankCounts.get(rank);
+        }
+
+        double profitRate = ((double) totalPrize / purchaseAmount) * 100;
+        double rounded = Math.round(profitRate * 10) / 10.0;
+
+        System.out.println("총 수익률은 " + rounded + "%입니다.");
     }
 }
