@@ -10,7 +10,6 @@ public class Application {
         System.out.println(purchaseAmount + "원 입력됨 (테스트용)");
 
         int count = purchaseAmount / 1000;
-        System.out.println(count + "개를 구매했습니다.");
 
         List<Lotto> lottos = LottoMachine.issueLottos(count);
         for (Lotto lotto : lottos) {
