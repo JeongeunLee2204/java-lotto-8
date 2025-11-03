@@ -25,13 +25,15 @@ public class LottoResult {
 
         Map<Rank, Integer> rankCounts = countRanks();
 
-        for (Rank rank : Rank.values()) {
-            if (rank == Rank.NONE) continue;
+        List<Rank> sortedRanks = List.of(Rank.FIFTH, Rank.FOURTH, Rank.THIRD, Rank.SECOND, Rank.FIRST);
+
+        for (Rank rank : sortedRanks) {
             System.out.println(rank.getMessage() + " - " + rankCounts.getOrDefault(rank, 0) + "개");
         }
 
         printProfitRate(rankCounts, purchaseAmount);
     }
+
 
     private Map<Rank, Integer> countRanks() {
         Map<Rank, Integer> rankCounts = new EnumMap<>(Rank.class);
